@@ -14,7 +14,6 @@ public class PetTypeFacade {
     private final PetTypeRetrievalClient petTypeRetrievalClient;
     private final PetTypeUpdaterClient petTypeUpdaterClient;
 
-
     public PetType getPetType(Long id) {
         return petTypeRetrievalClient.getById(id);
     }
@@ -37,6 +36,7 @@ public class PetTypeFacade {
         return false;
     }
 
+    @Transactional
     public PetType update(PetType petType, Long id) {
         PetType retrievedPetType = getPetType(id);
         if (retrievedPetType != null) {
@@ -45,6 +45,5 @@ public class PetTypeFacade {
             return retrievedPetType;
         }
         return null;
-
     }
 }

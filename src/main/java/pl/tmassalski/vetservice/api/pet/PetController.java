@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pl.tmassalski.vetservice.domain.pet.Pet;
 import pl.tmassalski.vetservice.domain.pet.PetCommand;
+import pl.tmassalski.vetservice.domain.pet.PetException;
 import pl.tmassalski.vetservice.domain.pet.PetFacade;
 
 import javax.validation.Valid;
@@ -43,6 +45,27 @@ public class PetController {
         return pets.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @DeleteMapping(value = "/{petId}")
+    @ResponseStatus(HttpStatus.OK)
+    void delete(@PathVariable Long petId) {
+        if (!petFacade.delete(petId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet id not found");
+        }
+    }
+
+    @PutMapping(value = "/{petId}")
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    PetResponse update(@PathVariable Long petId, @RequestBody @Valid CreatePetRequest request) {
+        PetCommand command = convertToPetCommand(request);
+        try {
+            Pet updatedPet = petFacade.update(command, petId);
+            return convertToDto(updatedPet);
+        } catch (PetException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet id not found", e);
+        }
     }
 
     private PetCommand convertToPetCommand(CreatePetRequest request) {
