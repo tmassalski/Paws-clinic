@@ -1,8 +1,6 @@
 package pl.tmassalski.vetservice.domain.visit;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import pl.tmassalski.vetservice.domain.pet.Pet;
 
 import javax.persistence.*;
@@ -11,6 +9,9 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class Visit {
 
     @Id
@@ -24,4 +25,11 @@ public class Visit {
     Pet pet;
 
     String description;
+
+    static Visit generate(VisitCommand command) {
+        return Visit.builder()
+                .date(command.getDate())
+                .description(command.getDescription())
+                .build();
+    }
 }

@@ -31,8 +31,8 @@ public class Pet {
     @JoinColumn(name = "owner_id")
     Owner owner;
 
-    @OneToMany
-    Set<Visit> visits;
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
+    Set<Visit> visits = new HashSet<>();
 
     public void addVisit(Visit visit) {
         if (visits == null) {
