@@ -2,6 +2,6 @@ package pl.tmassalski.vetservice.domain.pet;
 
 public interface PetUpdaterClient {
 
-    void delete(Long petId);
+    void delete(Pet pet);
     void save(Pet pet);
 }

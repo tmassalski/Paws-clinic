@@ -3,6 +3,7 @@ package pl.tmassalski.vetservice.infrastructure.owner;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.tmassalski.vetservice.domain.owner.Owner;
+import pl.tmassalski.vetservice.domain.owner.OwnerNotFoundException;
 import pl.tmassalski.vetservice.domain.owner.OwnerRetrievalClient;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class OwnerRetrievalPostgresClient implements OwnerRetrievalClient {
     @Override
     public Owner getById(Long id) {
         Optional<Owner> ownerOptional = ownerRepository.findById(id);
-        return ownerOptional.orElseThrow();
+        return ownerOptional.orElseThrow(() -> new OwnerNotFoundException(id));
     }
 
     @Override

@@ -1,9 +1,9 @@
-package pl.tmassalski.vetservice.infrastructure.pet;
+package pl.tmassalski.vetservice.infrastructure.petType;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.tmassalski.vetservice.domain.pet.PetType;
-import pl.tmassalski.vetservice.domain.pet.PetTypeUpdaterClient;
+import pl.tmassalski.vetservice.domain.petType.PetType;
+import pl.tmassalski.vetservice.domain.petType.PetTypeUpdaterClient;
 
 @Repository
 @RequiredArgsConstructor
@@ -12,8 +12,8 @@ public class PetTypePostgresUpdaterClient implements PetTypeUpdaterClient {
     private final PetTypeRepository petTypeRepository;
 
     @Override
-    public void delete(Long id) {
-        petTypeRepository.deleteById(id);
+    public void delete(PetType petType) {
+        petTypeRepository.delete(petType);
     }
 
     @Override

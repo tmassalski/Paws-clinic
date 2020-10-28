@@ -1,4 +1,4 @@
-package pl.tmassalski.vetservice.domain.pet;
+package pl.tmassalski.vetservice.domain.petType;
 
 import java.util.List;
 

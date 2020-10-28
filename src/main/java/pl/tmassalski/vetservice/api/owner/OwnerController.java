@@ -4,9 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import pl.tmassalski.vetservice.domain.owner.Owner;
-import pl.tmassalski.vetservice.domain.owner.OwnerException;
 import pl.tmassalski.vetservice.domain.owner.OwnerFacade;
 
 import javax.validation.Valid;
@@ -24,7 +22,7 @@ public class OwnerController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    OwnerResponse create(@RequestBody @Valid CreateOwnerRequest request) {
+    OwnerResponse create(@RequestBody @Valid OwnerRequest request) {
         Owner owner = convertToEntity(request);
         Owner createdOwner = ownerFacade.createOwner(owner);
         return convertToDto(createdOwner);
@@ -49,25 +47,19 @@ public class OwnerController {
     @DeleteMapping(value = "/{ownerId}")
     @ResponseStatus(HttpStatus.OK)
     void delete(@PathVariable Long ownerId) {
-        if (!ownerFacade.delete(ownerId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Owner id not found");
-        }
+        ownerFacade.delete(ownerId);
     }
 
     @PutMapping(value = "/{ownerId}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    OwnerResponse update(@PathVariable Long ownerId, @RequestBody @Valid CreateOwnerRequest request) {
+    OwnerResponse update(@PathVariable Long ownerId, @RequestBody @Valid OwnerRequest request) {
         Owner owner = convertToEntity(request);
-        try {
-            Owner updatedOwner = ownerFacade.update(owner, ownerId);
-            return convertToDto(updatedOwner);
-        } catch (OwnerException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Owner id not found", e);
-        }
+        Owner updatedOwner = ownerFacade.update(owner, ownerId);
+        return convertToDto(updatedOwner);
     }
 
-    private Owner convertToEntity(CreateOwnerRequest request) {
+    private Owner convertToEntity(OwnerRequest request) {
         return modelMapper.map(request, Owner.class);
     }
 

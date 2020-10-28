@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import pl.tmassalski.vetservice.domain.pet.PetType;
-import pl.tmassalski.vetservice.domain.pet.PetTypeException;
-import pl.tmassalski.vetservice.domain.pet.PetTypeFacade;
+import pl.tmassalski.vetservice.domain.petType.PetType;
+import pl.tmassalski.vetservice.domain.petType.PetTypeFacade;
 
 import javax.validation.Valid;
 
@@ -34,12 +32,8 @@ public class PetTypeController {
     @GetMapping(value = "/{petTypeId}")
     @ResponseBody
     PetTypeResponse getById(@PathVariable("petTypeId") Long petTypeId) {
-        try {
-            PetType petType = petTypeFacade.getPetType(petTypeId);
-            return convertToDto(petType);
-        } catch (PetTypeException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet Type id not found", e);
-        }
+        PetType petType = petTypeFacade.getPetType(petTypeId);
+        return convertToDto(petType);
     }
 
     @PostMapping
@@ -54,9 +48,7 @@ public class PetTypeController {
     @DeleteMapping(value = "/{petTypeId}")
     @ResponseStatus(HttpStatus.OK)
     void delete(@PathVariable Long petTypeId) {
-        if (!petTypeFacade.delete(petTypeId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet Type id not found");
-        }
+        petTypeFacade.delete(petTypeId);
     }
 
     @PutMapping(value = "/{petTypeId}")
@@ -64,12 +56,8 @@ public class PetTypeController {
     @ResponseBody
     PetTypeResponse update(@PathVariable Long petTypeId, @RequestBody @Valid PetTypeRequest request) {
         PetType petType = convertToEntity(request);
-        try {
-            PetType updatedPetType = petTypeFacade.update(petType, petTypeId);
-            return convertToDto(updatedPetType);
-        } catch (PetTypeException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet Type id not found", e);
-        }
+        PetType updatedPetType = petTypeFacade.update(petType, petTypeId);
+        return convertToDto(updatedPetType);
     }
 
     private PetType convertToEntity(PetTypeRequest petTypeRequest) {

@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import pl.tmassalski.vetservice.domain.pet.Pet;
 import pl.tmassalski.vetservice.domain.pet.PetCommand;
-import pl.tmassalski.vetservice.domain.pet.PetException;
 import pl.tmassalski.vetservice.domain.pet.PetFacade;
 
 import javax.validation.Valid;
@@ -25,7 +23,7 @@ public class PetController {
     @PostMapping
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    PetResponse create(@Valid @RequestBody CreatePetRequest request) {
+    PetResponse create(@Valid @RequestBody PetRequest request) {
         PetCommand petCommand = convertToPetCommand(request);
         Pet createdPet = petFacade.createPet(petCommand);
         return convertToDto(createdPet);
@@ -50,25 +48,19 @@ public class PetController {
     @DeleteMapping(value = "/{petId}")
     @ResponseStatus(HttpStatus.OK)
     void delete(@PathVariable Long petId) {
-        if (!petFacade.delete(petId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet id not found");
-        }
+        petFacade.delete(petId);
     }
 
     @PutMapping(value = "/{petId}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    PetResponse update(@PathVariable Long petId, @RequestBody @Valid CreatePetRequest request) {
+    PetResponse update(@PathVariable Long petId, @RequestBody @Valid PetRequest request) {
         PetCommand command = convertToPetCommand(request);
-        try {
-            Pet updatedPet = petFacade.update(command, petId);
-            return convertToDto(updatedPet);
-        } catch (PetException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pet id not found", e);
-        }
+        Pet updatedPet = petFacade.update(command, petId);
+        return convertToDto(updatedPet);
     }
 
-    private PetCommand convertToPetCommand(CreatePetRequest request) {
+    private PetCommand convertToPetCommand(PetRequest request) {
         return modelMapper.map(request, PetCommand.class);
     }
 

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-class CreateOwnerRequest {
+class OwnerRequest {
 
     @NotBlank
     String firstName;

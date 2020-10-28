@@ -2,6 +2,7 @@ package pl.tmassalski.vetservice.domain.pet;
 
 import lombok.*;
 import pl.tmassalski.vetservice.domain.owner.Owner;
+import pl.tmassalski.vetservice.domain.petType.PetType;
 import pl.tmassalski.vetservice.domain.visit.Visit;
 
 import javax.persistence.*;

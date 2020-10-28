@@ -1,10 +1,10 @@
-package pl.tmassalski.vetservice.infrastructure.pet;
+package pl.tmassalski.vetservice.infrastructure.petType;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.tmassalski.vetservice.domain.pet.PetType;
-import pl.tmassalski.vetservice.domain.pet.PetTypeException;
-import pl.tmassalski.vetservice.domain.pet.PetTypeRetrievalClient;
+import pl.tmassalski.vetservice.domain.petType.PetType;
+import pl.tmassalski.vetservice.domain.petType.PetTypeNotFoundException;
+import pl.tmassalski.vetservice.domain.petType.PetTypeRetrievalClient;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,8 +18,7 @@ public class PetTypePostgresRetrievalClient implements PetTypeRetrievalClient {
     @Override
     public PetType getById(Long id) {
         Optional<PetType> petTypeOptional = petTypeRepository.findById(id);
-        //todo
-        return petTypeOptional.orElseThrow(PetTypeException::idNotFound);
+        return petTypeOptional.orElseThrow(() -> new PetTypeNotFoundException(id));
     }
 
     @Override

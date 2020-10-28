@@ -1,9 +1,9 @@
-package pl.tmassalski.vetservice.infrastructure.pet;
+package pl.tmassalski.vetservice.infrastructure.petType;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import pl.tmassalski.vetservice.domain.pet.PetType;
-import pl.tmassalski.vetservice.domain.pet.PetTypeCreatorClient;
+import pl.tmassalski.vetservice.domain.petType.PetType;
+import pl.tmassalski.vetservice.domain.petType.PetTypeCreatorClient;
 
 @Repository
 @RequiredArgsConstructor

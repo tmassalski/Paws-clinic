@@ -3,6 +3,7 @@ package pl.tmassalski.vetservice.infrastructure.pet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.tmassalski.vetservice.domain.pet.Pet;
+import pl.tmassalski.vetservice.domain.pet.PetNotFoundException;
 import pl.tmassalski.vetservice.domain.pet.PetRetrievalClient;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class PetRetrievalPostgresClient implements PetRetrievalClient {
     @Override
     public Pet getById(Long id) {
         Optional<Pet> petOptional = petRepository.findById(id);
-        return petOptional.orElseThrow();
+        return petOptional.orElseThrow(()->new PetNotFoundException(id));
     }
 
     @Override

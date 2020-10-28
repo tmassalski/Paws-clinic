@@ -1,4 +1,4 @@
-package pl.tmassalski.vetservice.domain.pet;
+package pl.tmassalski.vetservice.domain.petType;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,23 +27,16 @@ public class PetTypeFacade {
     }
 
     @Transactional
-    public boolean delete(Long id) {
+    public void delete(Long id) {
         PetType petType = getPetType(id);
-        if (petType != null) {
-            petTypeUpdaterClient.delete(id);
-            return true;
-        }
-        return false;
+        petTypeUpdaterClient.delete(petType);
     }
 
     @Transactional
     public PetType update(PetType petType, Long id) {
         PetType retrievedPetType = getPetType(id);
-        if (retrievedPetType != null) {
-            retrievedPetType.setTypeName(petType.getTypeName());
-            petTypeUpdaterClient.save(retrievedPetType);
-            return retrievedPetType;
-        }
-        return null;
+        retrievedPetType.setTypeName(petType.getTypeName());
+        petTypeUpdaterClient.save(retrievedPetType);
+        return retrievedPetType;
     }
 }

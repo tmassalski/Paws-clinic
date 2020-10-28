@@ -3,6 +3,7 @@ package pl.tmassalski.vetservice.infrastructure.visit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.tmassalski.vetservice.domain.visit.Visit;
+import pl.tmassalski.vetservice.domain.visit.VisitNotFoundException;
 import pl.tmassalski.vetservice.domain.visit.VisitRetrievalClient;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class VisitRetrievalPostgresClient implements VisitRetrievalClient {
     @Override
     public Visit getById(Long id) {
         Optional<Visit> visitOptional = visitRepository.findById(id);
-        return visitOptional.orElseThrow();
+        return visitOptional.orElseThrow(()-> new VisitNotFoundException(id));
     }
 
     @Override
