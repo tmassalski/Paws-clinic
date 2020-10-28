@@ -26,7 +26,7 @@ public class Owner {
     String phone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    Set<Pet> pets = new HashSet<>();
+    Set<Pet> pets;
 
     public void addPet(Pet pet) {
         if (pets == null) {
@@ -43,6 +43,7 @@ public class Owner {
                 .address(ownerCommand.getAddress())
                 .city(ownerCommand.getCity())
                 .phone(ownerCommand.getPhone())
+                .pets(new HashSet<>())
                 .build();
     }
 }

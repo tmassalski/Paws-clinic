@@ -6,6 +6,7 @@ import pl.tmassalski.vetservice.domain.petType.PetType;
 import pl.tmassalski.vetservice.domain.visit.Visit;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-    Date birthDate;
+    LocalDate birthDate;
 
     @ManyToOne
     @JoinColumn(name = "petType_id")
@@ -33,7 +34,7 @@ public class Pet {
     Owner owner;
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
-    Set<Visit> visits = new HashSet<>();
+    Set<Visit> visits;
 
     public void addVisit(Visit visit) {
         if (visits == null) {
@@ -47,6 +48,7 @@ public class Pet {
         return Pet.builder()
                 .name(petCommand.getName())
                 .birthDate(petCommand.getBirthDate())
+                .visits(new HashSet<>())
                 .build();
     }
 }
