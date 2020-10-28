@@ -3,14 +3,14 @@ package pl.tmassalski.vetservice.domain.pet;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class PetCommand {
 
     String name;
-    Date birthDate;
+    LocalDate birthDate;
     Long petTypeId;
     Long petOwnerId;
 }

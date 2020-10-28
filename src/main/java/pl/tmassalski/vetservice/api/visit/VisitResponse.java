@@ -3,14 +3,14 @@ package pl.tmassalski.vetservice.api.visit;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class VisitResponse {
 
     Long id;
-    Date date;
+    LocalDate date;
     Long petId;
     String description;
 }

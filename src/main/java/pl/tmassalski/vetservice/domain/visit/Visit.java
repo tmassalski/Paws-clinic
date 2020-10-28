@@ -4,7 +4,7 @@ import lombok.*;
 import pl.tmassalski.vetservice.domain.pet.Pet;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor
@@ -17,7 +17,7 @@ public class Visit {
     @Id
     @GeneratedValue
     Long id;
-    Date date;
+    LocalDate date;
 
     @ManyToOne
     @JoinColumn(name = "pet_id")
