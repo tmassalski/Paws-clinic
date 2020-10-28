@@ -13,15 +13,15 @@ import java.util.Date;
 @Getter
 @Setter
 @Value
-public class CreatePetRequest {
+public class PetRequest {
 
     @NotBlank
     String name;
     @Past
     Date birthDate;
-    @Min(1)
+    @Min(value = 1, message = "Incorrect ID")
     Long petTypeId;
-    @Min(1)
+    @Min(value = 1, message = "Incorrect ID")
     Long petOwnerId;
 
 }

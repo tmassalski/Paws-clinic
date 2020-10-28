@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.tmassalski.vetservice.domain.owner.Owner;
 import pl.tmassalski.vetservice.domain.owner.OwnerFacade;
+import pl.tmassalski.vetservice.domain.petType.PetType;
+import pl.tmassalski.vetservice.domain.petType.PetTypeFacade;
 
 @Service
 @RequiredArgsConstructor

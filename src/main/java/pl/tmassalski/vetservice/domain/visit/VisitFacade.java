@@ -29,20 +29,14 @@ public class VisitFacade {
     }
 
     @Transactional
-    public boolean delete(Long visitId) {
+    public void delete(Long visitId) {
         Visit visit = getVisit(visitId);
-        if (visit != null) {
-            visitUpdaterClient.delete(visitId);
-            return true;
-        }
-        return false;
+        visitUpdaterClient.delete(visit);
     }
 
+    @Transactional
     public Visit update(VisitCommand command, Long visitId) {
         Visit retrievedVisit = getVisit(visitId);
-        if (retrievedVisit == null) {
-            return null;
-        }
         return visitUpdater.updateVisit(retrievedVisit, command);
     }
 

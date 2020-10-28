@@ -3,7 +3,6 @@ package pl.tmassalski.vetservice.domain.owner;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.tmassalski.vetservice.domain.pet.PetType;
 
 import java.util.List;
 
@@ -15,11 +14,11 @@ public class OwnerFacade {
     private final OwnerCreatorClient ownerCreatorClient;
     private final OwnerUpdaterClient ownerUpdaterClient;
 
-    public Owner createOwner(Owner owner){
-      return ownerCreatorClient.create(owner);
+    public Owner createOwner(Owner owner) {
+        return ownerCreatorClient.create(owner);
     }
 
-    public Owner getOwner(Long id){
+    public Owner getOwner(Long id) {
         return ownerRetrievalClient.getById(id);
     }
 
@@ -28,21 +27,14 @@ public class OwnerFacade {
     }
 
     @Transactional
-    public boolean delete(Long id) {
+    public void delete(Long id) {
         Owner owner = getOwner(id);
-        if (owner != null) {
-            ownerUpdaterClient.delete(id);
-            return true;
-        }
-        return false;
+        ownerUpdaterClient.delete(owner);
     }
 
     @Transactional
     public Owner update(Owner owner, Long id) {
         Owner retrievedOwner = getOwner(id);
-        if (retrievedOwner == null) {
-            return null;
-        }
         retrievedOwner.setFirstName(owner.getFirstName());
         retrievedOwner.setLastName(owner.getLastName());
         retrievedOwner.setAddress(owner.getAddress());

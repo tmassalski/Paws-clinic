@@ -9,6 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class PetTypeRequest {
 
-    @NotBlank(message = "Type name cannot be blank")
+    @NotBlank(message = "Pet type name cannot be blank")
     String typeName;
 }

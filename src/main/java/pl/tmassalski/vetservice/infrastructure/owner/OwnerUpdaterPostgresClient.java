@@ -12,8 +12,8 @@ public class OwnerUpdaterPostgresClient implements OwnerUpdaterClient {
     private final OwnerRepository ownerRepository;
 
     @Override
-    public void delete(Long id) {
-        ownerRepository.deleteById(id);
+    public void delete(Owner owner) {
+        ownerRepository.delete(owner);
     }
 
     @Override

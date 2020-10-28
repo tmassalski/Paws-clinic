@@ -12,8 +12,8 @@ public class PetUpdaterPostgresClient implements PetUpdaterClient {
     private final PetRepository petRepository;
 
     @Override
-    public void delete(Long petId) {
-        petRepository.deleteById(petId);
+    public void delete(Pet pet) {
+        petRepository.delete(pet);
     }
 
     @Override

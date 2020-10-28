@@ -29,20 +29,13 @@ public class PetFacade {
     }
 
     @Transactional
-    public boolean delete(Long petId) {
+    public void delete(Long petId) {
         Pet pet = getPet(petId);
-        if (pet != null) {
-            petUpdaterClient.delete(petId);
-            return true;
-        }
-        return false;
+        petUpdaterClient.delete(pet);
     }
 
     public Pet update(PetCommand command, Long petId) {
         Pet retrievedPet = petRetrievalClient.getById(petId);
-        if (retrievedPet == null) {
-            return null;
-        }
         return petUpdater.updatePet(retrievedPet, command);
     }
 }

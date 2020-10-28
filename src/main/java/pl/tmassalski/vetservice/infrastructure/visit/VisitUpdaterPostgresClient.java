@@ -12,8 +12,8 @@ public class VisitUpdaterPostgresClient implements VisitUpdaterClient {
     private final VisitRepository visitRepository;
 
     @Override
-    public void delete(Long id) {
-        visitRepository.deleteById(id);
+    public void delete(Visit visit) {
+        visitRepository.delete(visit);
     }
 
     @Override

@@ -4,10 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import pl.tmassalski.vetservice.domain.visit.Visit;
 import pl.tmassalski.vetservice.domain.visit.VisitCommand;
-import pl.tmassalski.vetservice.domain.visit.VisitException;
 import pl.tmassalski.vetservice.domain.visit.VisitFacade;
 
 import javax.validation.Valid;
@@ -34,17 +32,13 @@ public class VisitController {
     @GetMapping(value = "/{visitId}")
     @ResponseBody
     VisitResponse getById(@PathVariable("visitId") Long visitId) {
-        try {
-            Visit visit = visitFacade.getVisit(visitId);
-            return convertToDto(visit);
-        } catch (VisitException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Visit id not found", e);
-        }
+        Visit visit = visitFacade.getVisit(visitId);
+        return convertToDto(visit);
     }
 
-    @GetMapping(value ="/pets/{petId}")
+    @GetMapping(value = "/pets/{petId}")
     @ResponseBody
-    Collection<VisitResponse> getByPetId(@PathVariable("petId") Long petId){
+    Collection<VisitResponse> getByPetId(@PathVariable("petId") Long petId) {
         Collection<Visit> visits = visitFacade.getByPetId(petId);
         return visits.stream()
                 .map(this::convertToDto)
@@ -63,9 +57,7 @@ public class VisitController {
     @DeleteMapping(value = "/{visitId}")
     @ResponseStatus(HttpStatus.OK)
     void delete(@PathVariable Long visitId) {
-        if (!visitFacade.delete(visitId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Visit id not found");
-        }
+        visitFacade.delete(visitId);
     }
 
     @PutMapping(value = "/{visitId}")
@@ -73,12 +65,8 @@ public class VisitController {
     @ResponseBody
     VisitResponse update(@PathVariable Long visitId, @RequestBody @Valid VisitRequest request) {
         VisitCommand command = convertToCommand(request);
-        try {
-            Visit updatedVisit = visitFacade.update(command, visitId);
-            return convertToDto(updatedVisit);
-        } catch (VisitException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Visit id not found", e);
-        }
+        Visit updatedVisit = visitFacade.update(command, visitId);
+        return convertToDto(updatedVisit);
     }
 
     private VisitCommand convertToCommand(VisitRequest visitRequest) {
