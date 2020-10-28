@@ -14,8 +14,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Value
-public class PetRequest {
+class PetRequest {
 
     @NotBlank
     String name;

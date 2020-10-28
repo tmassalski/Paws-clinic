@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class OwnerResponse {
+class OwnerResponse {
 
     Long id;
     String firstName;
