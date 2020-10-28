@@ -35,15 +35,4 @@ public class Owner {
         pets.add(pet);
         pet.setOwner(this);
     }
-
-    static Owner generate(OwnerCommand ownerCommand) {
-        return Owner.builder()
-                .firstName(ownerCommand.getFirstName())
-                .lastName(ownerCommand.getLastName())
-                .address(ownerCommand.getAddress())
-                .city(ownerCommand.getCity())
-                .phone(ownerCommand.getPhone())
-                .pets(new HashSet<>())
-                .build();
-    }
 }

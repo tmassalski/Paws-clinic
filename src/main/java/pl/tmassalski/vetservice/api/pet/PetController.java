@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/pets")
 @RequiredArgsConstructor
-public class PetController {
+class PetController {
 
     private final PetFacade petFacade;
     private final ModelMapper modelMapper;

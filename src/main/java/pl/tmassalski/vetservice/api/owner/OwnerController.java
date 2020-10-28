@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/owners")
 @RequiredArgsConstructor
-public class OwnerController {
+class OwnerController {
 
     private final ModelMapper modelMapper;
     private final OwnerFacade ownerFacade;

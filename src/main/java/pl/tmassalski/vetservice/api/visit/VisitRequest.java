@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class VisitRequest {
+class VisitRequest {
 
     @PastOrPresent
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")

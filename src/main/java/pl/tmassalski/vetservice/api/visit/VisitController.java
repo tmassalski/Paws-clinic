@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/visits")
 @RequiredArgsConstructor
-public class VisitController {
+class VisitController {
 
     private final VisitFacade visitFacade;
     private final ModelMapper modelMapper;
