@@ -5,6 +5,7 @@ import lombok.Setter;
 import pl.tmassalski.vetservice.api.pet.PetResponse;
 import pl.tmassalski.vetservice.domain.pet.Pet;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -17,5 +18,5 @@ class OwnerResponse {
     String address;
     String city;
     String phone;
-    Set<PetResponse> pets;
+    Set<PetResponse> pets = new HashSet<>();
 }
