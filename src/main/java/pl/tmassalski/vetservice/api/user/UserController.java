@@ -7,6 +7,7 @@ import pl.tmassalski.vetservice.domain.user.User;
 import pl.tmassalski.vetservice.domain.user.UserFacade;
 
 @RestController
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
 
