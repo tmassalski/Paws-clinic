@@ -27,17 +27,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("beastmaster")
                 .password(getPasswordEncoder().encode("beastmaster"))
+                .disabled(false)
                 .roles("ADMIN")
                 .and()
                 .withUser("user")
                 .password(getPasswordEncoder().encode("user"))
+                .disabled(false)
                 .roles("USER");
         auth.userDetailsService(userDetailsService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.httpBasic()
+                .and()
+                .authorizeRequests()
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
                 .antMatchers(HttpMethod.PATCH).hasRole("ADMIN")
@@ -47,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().defaultSuccessUrl("/swagger-ui.html", true).permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/login").permitAll()
-                .and().csrf().disable();
+                .and()
+                .csrf().disable();
     }
 }

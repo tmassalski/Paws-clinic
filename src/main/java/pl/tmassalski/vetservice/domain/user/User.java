@@ -22,7 +22,21 @@ public class User implements UserDetails {
 
     private String username;
     private String password;
+    private String email;
     private String role;
+    private Boolean enabled;
+
+    User() {
+        this.enabled = false;
+    }
+
+    static User generate(UserCommand command) {
+        User user = new User();
+        user.setUsername(command.getUsername());
+        user.setEmail(command.getEmail());
+        user.setRole("USER");
+        return user;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -56,6 +70,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

@@ -3,6 +3,7 @@ package pl.tmassalski.vetservice.api.user;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -10,7 +11,11 @@ import javax.validation.constraints.NotBlank;
 public class UserRequest {
 
     @NotBlank
-    String username;
+    private String username;
+
     @NotBlank
-    String password;
+    private String password;
+
+    @Email
+    private String email;
 }

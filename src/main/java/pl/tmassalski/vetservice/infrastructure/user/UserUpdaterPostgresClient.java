@@ -3,16 +3,17 @@ package pl.tmassalski.vetservice.infrastructure.user;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.tmassalski.vetservice.domain.user.User;
-import pl.tmassalski.vetservice.domain.user.UserCreatorClient;
+import pl.tmassalski.vetservice.domain.user.UserUpdaterClient;
+
 
 @Service
 @RequiredArgsConstructor
-class UserDetailsServicePostgresClient implements UserCreatorClient {
+class UserUpdaterPostgresClient implements UserUpdaterClient {
 
     private final UserRepository userRepository;
 
     @Override
-    public User register(User user) {
-        return userRepository.save(user);
+    public void update(User user) {
+        userRepository.save(user);
     }
 }
