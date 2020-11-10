@@ -16,7 +16,8 @@ import java.util.Set;
 public class Vet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "vet_sequence")
+    @SequenceGenerator(name = "vet_sequence", initialValue = 2)
     private Long id;
 
     private String firstName;

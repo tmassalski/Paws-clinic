@@ -16,7 +16,8 @@ import java.util.Set;
 public class Owner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "owner_sequence")
+    @SequenceGenerator(name = "owner_sequence", initialValue = 5)
     Long id;
 
     String firstName;

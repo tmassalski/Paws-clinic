@@ -15,8 +15,10 @@ import java.time.LocalDate;
 public class Visit {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "visit_sequence")
+    @SequenceGenerator(name = "visit_sequence", initialValue = 7)
     Long id;
+
     LocalDate date;
 
     @ManyToOne
