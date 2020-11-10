@@ -18,7 +18,8 @@ import java.util.Set;
 public class Specialty {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "specialty_sequence")
+    @SequenceGenerator(name = "specialty_sequence", initialValue = 7)
     private Long id;
     private String specialtyName;
 }
