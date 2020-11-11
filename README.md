@@ -10,7 +10,8 @@ Basic veterinary clinic service
 
 Swagger UI available under https://paws-clinic.herokuapp.com
 
-PUT, DELETE requests and /users endpoint are available only to admin.
+PUT, DELETE requests available only to admin.
+/users endpoint is accessible to everybody.
 
 for admin privileges use login: beastmaster, password: beastmaster
 for user privileges use login: user, password: user

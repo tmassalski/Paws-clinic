@@ -3,7 +3,6 @@ package pl.tmassalski.vetservice.domain.token;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 import pl.tmassalski.vetservice.domain.mail.MailService;
 import pl.tmassalski.vetservice.domain.user.User;
 
@@ -14,8 +13,6 @@ import javax.mail.MessagingException;
 class TokenSender {
 
     private final MailService mailService;
-
-
 
     void sendToken(Token token, User user) {
 
