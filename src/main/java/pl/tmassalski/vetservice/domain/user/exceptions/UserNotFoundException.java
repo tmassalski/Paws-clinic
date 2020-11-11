@@ -1,4 +1,4 @@
-package pl.tmassalski.vetservice.domain.user;
+package pl.tmassalski.vetservice.domain.user.exceptions;
 
 public class UserNotFoundException extends RuntimeException {
 
