@@ -17,7 +17,7 @@ for admin privileges use login: beastmaster, password: beastmaster
 for user privileges use login: user, password: user
 to logout/switch account go to https://paws-clinic.herokuapp.com/logout
 
-To create new user go to /users/activation (admin privileges only).
+To create new user go to /users/registration.
 New users requires activation by confirming token received via email.
 You can use https://10minutemail.net for testing.
 
